@@ -38,5 +38,5 @@ Use the following command to run the tests. This assumes that the command is bei
 inspec exec . --attrs examples/profile-attributes.yml 
 ```
 
-<script type="text/javascript" src="https://asciinema.org/a/CB75X3iVzJqBq8yyWQlyzLZJ0.js" id="asciicast-CB75X3iVzJqBq8yyWQlyzLZJ0" async></script>
+[![asciicast](https://asciinema.org/a/CB75X3iVzJqBq8yyWQlyzLZJ0.png)](https://asciinema.org/a/CB75X3iVzJqBq8yyWQlyzLZJ0)
 
