@@ -421,4 +421,8 @@ class AzureResourceProbe
     # Ensure that gb (as in gigabytes) is uppercased
     camel_case_data.gsub(/[gb]/, &:upcase)
   end
+
+  def exist?
+    true
+  end
 end

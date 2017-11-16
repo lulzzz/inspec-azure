@@ -1,0 +1,5 @@
+sa_resource_group_name: Inspec-Azure
+sa_name: kghbxoujxjnvuwo
+
+nsg_resource_group_name: Inspec-Azure
+nsg_name: Inspec-NSG

@@ -14,7 +14,7 @@ class AzureVirtualMachine < AzureResourceBase
   # static methods that are documented
   #
   # @author Russell Seymour
-  def initialize(opts)
+  def initialize(opts = {})
     super(opts)
   end
 
