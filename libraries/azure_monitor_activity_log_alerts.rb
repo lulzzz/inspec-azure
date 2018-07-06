@@ -44,10 +44,12 @@ class AzureMonitorActivityLogAlerts < AzurermResource
 
   def with_operations
     lambda do |alert|
-      conditions = alert.dig('properties', 'condition', 'allOf')
-      operations = conditions.find_all { |x| x['field'] == 'operationName' }.collect { |x| x['equals'] }
+      operation_name = ->(o) { o['field'] == 'operationName' }
+      equals         = ->(o) { o['equals'] }
 
-      alert.merge('operations' => operations)
+      conditions = alert.dig('properties', 'condition', 'allOf')
+
+      alert.merge('operations' => conditions.select(&operation_name).collect(&equals))
     end
   end
 end

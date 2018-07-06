@@ -27,7 +27,7 @@ class AzureMonitorActivityLogAlert < AzurermResource
 
     @name       = resp['name']
     @id         = resp['id']
-    @conditions = resp['properties']['condition']['allOf']
+    @conditions = resp.dig('properties', 'condition', 'allOf')
     @operations = collect_operations(@conditions)
 
     ATTRS.each do |attr_name, api_name|
@@ -50,6 +50,6 @@ class AzureMonitorActivityLogAlert < AzurermResource
   # @param [Hash] 'allOf' conditions from response properties
   # @return [Array] of operation strings
   def collect_operations(conditions)
-    conditions.find_all { |x| x['field'] == 'operationName' }.collect { |x| x['equals'] }
+    conditions.select { |o| o['field'] == 'operationName' }.collect { |o| o['equals'] }
   end
 end
