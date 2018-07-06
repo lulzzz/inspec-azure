@@ -2,7 +2,7 @@
 
 require 'azurerm_resource'
 
-class AzureMonitorActivityLogAlerts < AzurermResource
+class AzureMonitorActivityLogAlerts < AzurermPluralResource
   name 'azure_monitor_activity_log_alerts'
   desc 'Verifies settings for Azure Monitor Activity Log Alerts'
   example <<-EXAMPLE
@@ -11,16 +11,13 @@ class AzureMonitorActivityLogAlerts < AzurermResource
     end
   EXAMPLE
 
-  attr_reader :table
-
   FilterTable.create
-             .add_accessor(:entries)
-             .add_accessor(:where)
-             .add(:exists?) { |obj| !obj.entries.empty? }
-             .add(:names, field: 'name')
-             .add(:resource_group, field: 'resource_group')
-             .add(:operations, field: 'operations')
-             .connect(self, :table)
+             .register_column(:names, field: 'name')
+             .register_column(:resource_group, field: 'resource_group')
+             .register_column(:operations, field: 'operations')
+             .install_filter_methods_on_resource(self, :table)
+
+  attr_reader :table
 
   def initialize
     resp = client.activity_log_alerts

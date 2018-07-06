@@ -2,7 +2,7 @@
 
 require 'azurerm_resource'
 
-class AzureNetworkWatchers < AzurermResource
+class AzureNetworkWatchers < AzurermPluralResource
   name 'azure_network_watchers'
   desc 'Verifies settings for Network Watchers'
   example <<-EXAMPLE
@@ -11,14 +11,11 @@ class AzureNetworkWatchers < AzurermResource
     end
   EXAMPLE
 
-  attr_reader :table
-
   FilterTable.create
-             .add_accessor(:entries)
-             .add_accessor(:where)
-             .add(:exists?) { |obj| !obj.entries.empty? }
-             .add(:names, field: 'name')
-             .connect(self, :table)
+             .register_column(:names, field: 'name')
+             .install_filter_methods_on_resource(self, :table)
+
+  attr_reader :table
 
   def initialize(resource_group:)
     resp = client.network_watchers(resource_group)

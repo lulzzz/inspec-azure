@@ -2,7 +2,7 @@
 
 require 'azurerm_resource'
 
-class AzureSecurityCenterPolicy < AzurermResource
+class AzureSecurityCenterPolicy < AzurermSingularResource
   name 'azure_security_center_policy'
   desc 'Verifies settings for Security Center'
   example <<-EXAMPLE

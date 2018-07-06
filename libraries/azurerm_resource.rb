@@ -5,10 +5,6 @@ require 'support/azure'
 class AzurermResource < Inspec.resource(1)
   supports platform: 'azure'
 
-  def exists?
-    @exists ||= false
-  end
-
   def client
     Azure::Management.instance
                      .with_client(azure_client)
@@ -32,5 +28,13 @@ class AzurermResource < Inspec.resource(1)
 
       Azure::Credentials.new(args)
     end
+  end
+end
+
+class AzurermPluralResource < AzurermResource; end
+
+class AzurermSingularResource < AzurermResource
+  def exists?
+    @exists ||= false
   end
 end

@@ -2,7 +2,7 @@
 
 require 'azurerm_resource'
 
-class AzureMonitorLogProfile < AzurermResource
+class AzureMonitorLogProfile < AzurermSingularResource
   name 'azure_monitor_log_profile'
   desc 'Verifies settings for a Azure Monitor Log Profile'
   example <<-EXAMPLE
